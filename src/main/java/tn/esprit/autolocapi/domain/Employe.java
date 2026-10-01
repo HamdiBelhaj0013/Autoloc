@@ -6,17 +6,20 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Employe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idEmploye;
-    @Column(unique = true, nullable = false)
+    private Long idEmploye;
+    @Column(nullable = false)
     private String nom;
-    @Column(unique = true, nullable = false)
+    @Column(nullable = false)
     private String prenom;
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "agence_id", nullable = false)
+    private Agence agence;
 }

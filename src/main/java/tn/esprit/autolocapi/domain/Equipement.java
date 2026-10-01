@@ -1,21 +1,22 @@
 package tn.esprit.autolocapi.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Equipement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idEquipment;
-    private String libelleEquipemet;
+    private Long idEquipement;
+    private String libelle;
 
+    @ManyToMany(mappedBy = "equipments")
+    private List<Vehicule> vehicules = new ArrayList<>();
 }

@@ -5,22 +5,23 @@ import jakarta.validation.constraints.Email;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long idClient;
-    @Column(unique = false, nullable = false)
+    private Long idClient;
+    @Column(nullable = false)
     private String nom;
-    @Column(unique = false, nullable = false)
+    @Column(nullable = false)
     private String prenom;
-    @Column(unique = true, nullable = false , length = 50)
+    @Column(unique = true, nullable = false, length = 50)
     @Email(message = "invalid email")
     private String email;
     @Column(unique = true, nullable = false)
@@ -29,4 +30,6 @@ public class Client {
     private String numPermis;
     private LocalDate dateInscription;
 
+    @OneToMany(mappedBy = "client")
+    private List<Reservation> reservations = new ArrayList<>();
 }

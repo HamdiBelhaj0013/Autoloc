@@ -1,18 +1,16 @@
 package tn.esprit.autolocapi.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Contrat {
@@ -20,6 +18,19 @@ public class Contrat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idContrat;
     private LocalDate dateSignature;
+    @Column(precision = 10, scale = 2)
     private BigDecimal montantTotal;
-    private Boolean valide;
+    private boolean valide;
+
+    @OneToOne
+    @JoinColumn(name = "reservation_id", unique = true, nullable = false)
+    private Reservation reservation;
+
+    @OneToMany(mappedBy = "contrat", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Paiement> paiements = new ArrayList<>();
+
+    public void addPaiement(Paiement p) {
+        paiements.add(p);
+        p.setContrat(this);
+    }
 }
