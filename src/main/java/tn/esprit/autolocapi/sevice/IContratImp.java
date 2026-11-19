@@ -2,6 +2,7 @@ package tn.esprit.autolocapi.sevice;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tn.esprit.autolocapi.domain.Contrat;
 import tn.esprit.autolocapi.domain.Reservation;
 import tn.esprit.autolocapi.repository.ContratRepository;
@@ -23,8 +24,14 @@ public class IContratImp implements IContratService {
     }
 
     @Override
+    @Transactional
     public void supprimerContratById(Long id) {
-        contratRepository.deleteById(id);
+        contratRepository.findById(id).ifPresent(contrat -> {
+            if (contrat.getReservation() != null) {
+                contrat.getReservation().setContrat(null);
+            }
+            contratRepository.delete(contrat);
+        });
     }
 
     @Override
