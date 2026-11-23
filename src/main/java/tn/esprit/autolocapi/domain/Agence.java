@@ -1,6 +1,7 @@
 package tn.esprit.autolocapi.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -25,7 +26,7 @@ public class Agence {
     @OneToMany(mappedBy = "agence")
     private List<Employe> employes = new ArrayList<>();
 
-    @JsonIgnore
+    @JsonIgnoreProperties("agence")
     @OneToMany(mappedBy = "agence")
     private List<Vehicule> vehicules = new ArrayList<>();
 }

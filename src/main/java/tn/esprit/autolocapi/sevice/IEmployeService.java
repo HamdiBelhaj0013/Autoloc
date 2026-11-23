@@ -10,4 +10,6 @@ public interface IEmployeService {
     Employe modifierEmploye(Employe employe);
     Employe getEmployeById(Long id);
     List<Employe> getAllEmployes();
+    Employe desaffecterEmploye (Long idEmploye);
+    Employe affecterEmploye (Long idEmploye,Long idAgence);
 }

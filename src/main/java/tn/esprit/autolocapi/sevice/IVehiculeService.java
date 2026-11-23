@@ -10,4 +10,6 @@ public interface IVehiculeService {
     Vehicule modifierVehicule(Vehicule vehicule);
     Vehicule getVehiculeById(Long id);
     List<Vehicule> getAllVehicules();
+    Vehicule affecterEquipement(Long idVehicule, Long idEquipement);
+    Vehicule desaffecterEquipement(Long idVehicule, Long idEquipement);
 }

@@ -10,4 +10,5 @@ public interface IAgenceService {
     Agence modifierAgence(Agence agence);
     Agence getAgenceById(Long id);
     List<Agence> getAllAgences();
+    Agence ajouterAgenceEtAffecterVehicules(Agence agence);
 }
