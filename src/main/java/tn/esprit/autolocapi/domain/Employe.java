@@ -20,8 +20,8 @@ public class Employe {
     @Enumerated(EnumType.STRING)
     private RoleEmploye role;
 
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "vehicules", "employes"})
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "agence_id", nullable = false)
+    @JoinColumn(name = "agence_id")
     private Agence agence;
 }

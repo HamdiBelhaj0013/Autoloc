@@ -38,4 +38,9 @@ public class AgenceController {
     public List<Agence> getAllAgences() {
         return agenceService.getAllAgences();
     }
+
+    @PostMapping("/ajouterAgenceEtAffecterVehicules")
+    public Agence ajouterAgenceEtAffecterVehicules(@RequestBody Agence agence) {
+        return agenceService.ajouterAgenceEtAffecterVehicules(agence);
+    }
 }
